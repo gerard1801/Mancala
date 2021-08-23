@@ -7,10 +7,10 @@ public class Mancala extends Pit{
 
     private int testIndex;
 
-    public Mancala(int i, Pit pit) {
-        super(i, pit);
+    public Mancala(int i, Pit pit, Player player) {
+        super(i, pit, player);
         this.stones = 0;
-        this.neighbour = new Pit(++i, pit);
+        this.neighbour = new Pit(++i, pit, player);
         this.testIndex = i;
     }
 

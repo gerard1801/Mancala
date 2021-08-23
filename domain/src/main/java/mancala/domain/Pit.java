@@ -1,34 +1,50 @@
 package mancala.domain;
 
-public class Pit{
+public class Pit extends Player{
 
     public Pit neighbour;
     private int stones;
+    public String owner;
 
-    //private String owner;
     public int testIndex;
 
 
-    public Pit(int stones) {
-        //super(name, beurt);
-        this.neighbour = new Pit(1, this);
+    public Pit(int stones, Player player) {
+        super(player);
+
+        this.neighbour = new Pit(1,this, player);
         this.stones = stones;
-        this.testIndex = testIndex;
-        //this.owner = owner;
+        this.owner = player.getName();
+        this.testIndex = 1;
     }
 
-    public Pit(int i, Pit pit) {
-        this.stones = 4;
+    public Pit(int stones) {
 
-        if(i < 5) {
-            this.neighbour = new Pit(++i, pit);
-        } else if (i == 5) {
-            this.neighbour = new Mancala(++i, pit);
-        } else if (i < 12) {
-            this.neighbour = new Pit(++i, pit);
+        this.neighbour = new Pit(1, this, new Player("gerardTest", true));
+        this.stones = stones;
+        //this.owner = name;
+
+        this.testIndex = testIndex;
+    }
+
+
+
+    public Pit(int i, Pit pit, Player player) {
+        super(player);
+        this.stones = 4;
+        if (i < 7) {
+            this.neighbour = new Pit(++i, pit, player);
+            this.owner = player.getName();
+        } else if (i == 7) {
+            this.neighbour = new Mancala(++i, pit, player);
+            this.owner = player.getName();
+        } else if (i < 14) {
+            this.neighbour = new Pit(++i, pit, player);
+            this.owner = player.opponent.getName();
         }
-        else if (i == 12){
-            this.neighbour = new Mancala(++i, pit);
+        else if (i == 14){
+            this.neighbour = new Mancala(++i, pit, player);
+            this.owner = player.opponent.getName();
         }
         this.testIndex = i;
     }
@@ -49,6 +65,13 @@ public class Pit{
             this.neighbour.passStonesToNeighbour(stonesAmount);
         } return this;
     }
+
+    //public void checkIfCurrentPlayerIsOwner() {
+    //    if (player.name == this.owner) {
+    //        return true;
+            //play();
+    //    } else return false;
+   // }
 
     public Pit getNeighbour(int index) {
         if (index > 1) {

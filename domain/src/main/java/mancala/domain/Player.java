@@ -2,17 +2,34 @@ package mancala.domain;
 
 
 public class Player {
-    //welke speler aan zet is
-    //wat de speler voor zet heeft gedaan
-    public String name;
-    //public Boolean beurt;
 
-    public Player(String name) {
-        this.name = name;
-        //this.beurt = beurt;
+    public String name;
+    public boolean active;
+    public Player opponent;
+
+    public Player() {
     }
 
-    public String getPlayer(String name) {
+    public Player(String name, boolean active) {
+        this.name = name;
+        this.active = active;
+
+        this.opponent = new Player(this);
+    }
+
+    public Player(Player opponent) {
+        this.opponent = opponent;
+    }
+
+    //public Player getOpponent(){
+    //    return this.opponent;
+    //}
+
+    public String getName() {
         return this.name;
+    }
+
+    public boolean getActive(){
+        return this.active;
     }
 }

@@ -50,6 +50,39 @@ public class PitTest {
     public void areTheMancalaClassesEmpty() {
         Pit pit = new Pit(4);
         //assertEquals(0, pit.getNeighbour(6).getStones());
-        assertEquals(0, pit.getNeighbour(13).getStones());
+        //assertEquals(0, pit.getNeighbour(12).getStones());
     }
+
+    @Test
+    public void checkOwners() {
+        Player playerOne = new Player("gerard", true);
+        Player playerTwo = new Player("henk", false);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
+        assertEquals("gerard", pit.owner);
+        assertEquals("henk", pit.getNeighbour(9).owner);
+    }
+
+    @Test
+    public void isActivePlayerOwner() {
+        Player playerOne = new Player("gerard", true);
+        Player playerTwo = new Player("henk", false);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
+
+        pit.play();
+
+        //assertEquals(playerOne.name, )
+    }
+
+
+
+    @Test
+    //is de pit waaraan de stenen worden doorgegeven leeg?
+    public void isTheLastPitEmpty() {
+        Pit pit = new Pit(4);
+        //pit.getNeighbour(5).stones = 0;
+    }
+
+    //pak de stenen in de tegenover gestelde pit en return de som van de pits.
 }
