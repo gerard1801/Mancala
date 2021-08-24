@@ -21,10 +21,6 @@ public class Player {
         this.opponent = opponent;
     }
 
-    //public Player getOpponent(){
-    //    return this.opponent;
-    //}
-
     public String getName() {
         return this.name;
     }

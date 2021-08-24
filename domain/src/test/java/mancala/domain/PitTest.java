@@ -14,9 +14,10 @@ public class PitTest {
     @Test
     //wordt een pit leeg na een zet?
     public void pitIsEmptyAfterPlay() {
+        Player playerOne = new Player("gerard", true);
         Pit pit = new Pit(4);
         assertEquals(4, pit.getStones());
-        pit.play();
+        pit.play(playerOne);
         assertEquals(0, pit.getStones());
     }
 
@@ -24,7 +25,7 @@ public class PitTest {
     //heeft de pit een buurman?
     public void pitHasANeigbour() {
         Pit pit = new Pit(4);
-        assertEquals(pit.neighbour.testIndex, 2);
+        assertEquals(2, pit.neighbour.testIndex);
     }
 
     @Test
@@ -38,19 +39,12 @@ public class PitTest {
     @Test
     //worden de stenen doorgegeven aan de volgende buren als er een zet wordt gedaan?
     public void passStonesToNeighboursAndAddOne() {
+        Player playerOne = new Player("gerard", true);
         Pit pit = new Pit(4);
-        pit.play();
+        pit.play(playerOne);
         assertEquals(5, pit.getNeighbour(1).getStones());
         assertEquals(5, pit.getNeighbour(3).getStones());
         assertEquals(0, pit.getStones());
-    }
-
-    @Test
-    //zijn de mancala's leeg?
-    public void areTheMancalaClassesEmpty() {
-        Pit pit = new Pit(4);
-        //assertEquals(0, pit.getNeighbour(6).getStones());
-        //assertEquals(0, pit.getNeighbour(12).getStones());
     }
 
     @Test
@@ -64,19 +58,66 @@ public class PitTest {
     }
 
     @Test
-    public void isActivePlayerOwner() {
+    public void AddStonesToNeighboursOnIndexOwnerIsTrue() {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
         playerOne.opponent = playerTwo;
         Pit pit = new Pit(4, playerOne);
 
+        pit.getNeighbour(4).play(playerOne);
+        assertEquals(0, pit.getNeighbour(4).getStones());
+        assertEquals(5, pit.getNeighbour(5).getStones());
+        assertEquals(1, pit.getNeighbour(6).getStones());
+        assertEquals(5, pit.getNeighbour(8).getStones());
+        assertEquals(4, pit.getNeighbour(9).getStones());
+    }
+
+    @Test
+    public void AddStonesToNeighboursOnIndexOwnerIsFalse() {
+        Player playerOne = new Player("gerard", true);
+        Player playerTwo = new Player("henk", false);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
+
+        pit.getNeighbour(4).play(playerTwo);
+        assertEquals(0, pit.getNeighbour(4).getStones());
+        assertEquals(5, pit.getNeighbour(5).getStones());
+        assertEquals(0, pit.getNeighbour(6).getStones());
+        assertEquals(5, pit.getNeighbour(8).getStones());
+        assertEquals(5, pit.getNeighbour(9).getStones());
+    }
+
+    @Test
+    public void StealStonesAddToMancala() {
+        Player playerOne = new Player("gerard", true);
+        Player playerTwo = new Player("henk", false);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
+
+
+    }
+
+
+
+
+
+
+
+
+/*
+    @Test
+    public void isActivePlayerOwner() {
+        Player playerOne = new Player("gerard", true);
+        Player playerTwo = new Player("henk", false);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
         pit.play();
 
         //assertEquals(playerOne.name, )
     }
 
 
-
+*/
     @Test
     //is de pit waaraan de stenen worden doorgegeven leeg?
     public void isTheLastPitEmpty() {

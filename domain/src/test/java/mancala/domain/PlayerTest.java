@@ -10,10 +10,8 @@ public class PlayerTest {
     public void PlayerhasOpponent() {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
-        //playerTwo.opponent = playerOne;
         playerOne.opponent = playerTwo;
         assertEquals("henk", playerOne.opponent.name);
-        //assertEquals("gerard", playerTwo.opponent.name);
         assertEquals("gerard", playerOne.name);
     }
 
@@ -21,11 +19,9 @@ public class PlayerTest {
     public void onlyPlayerOneIsActive() {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
-        //playerTwo.opponent = playerOne;
         playerOne.opponent = playerTwo;
         assertEquals(true, playerOne.getActive());
         assertEquals(false, playerTwo.getActive());
-        //assertEquals(true, playerTwo.opponent.getActive());
 
     }
 /*
