@@ -74,29 +74,107 @@ public class PitTest {
 
     @Test
     public void AddStonesToNeighboursOnIndexOwnerIsFalse() {
-        Player playerOne = new Player("gerard", true);
-        Player playerTwo = new Player("henk", false);
+        Player playerOne = new Player("gerard", false);
+        Player playerTwo = new Player("henk", true);
         playerOne.opponent = playerTwo;
         Pit pit = new Pit(4, playerOne);
 
-        pit.getNeighbour(4).play(playerTwo);
-        assertEquals(0, pit.getNeighbour(4).getStones());
-        assertEquals(5, pit.getNeighbour(5).getStones());
-        assertEquals(0, pit.getNeighbour(6).getStones());
-        assertEquals(5, pit.getNeighbour(8).getStones());
-        assertEquals(5, pit.getNeighbour(9).getStones());
+        pit.getNeighbour(4).play(playerOne);
+        assertEquals(4, pit.getNeighbour(4).getStones());
+        assertEquals(4, pit.getNeighbour(5).getStones());
     }
 
     @Test
-    public void StealStonesAddToMancala() {
+    public void passMancalaIfOwnerIncorrect() {
+        Player playerOne = new Player("gerard", false);
+        Player playerTwo = new Player("henk", true);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
+        pit.getNeighbour(12).stones = 8;
+        pit.getNeighbour(12).play(playerTwo);
+
+        assertEquals(0, pit.getNeighbour(12).getStones());
+        assertEquals(1, pit.getNeighbour(13).getStones());
+        assertEquals(0, pit.getNeighbour(6).getStones());
+        assertEquals(5, pit.getNeighbour(7).getStones());
+    }
+
+    @Test
+    public void StealStones() {
+        Player playerOne = new Player("gerard", true);
+        Pit pit = new Pit(4, playerOne);
+        pit.getNeighbour(4).stones = 0;
+        pit.play(playerOne);
+        //assertEquals(1, pit.getNeighbour(4).getStones());
+        assertEquals(0, pit.getNeighbour(4).getStones());
+        assertEquals(0, pit.getNeighbour(8).getStones());
+    }
+
+    @Test
+    public void addStolenStonesToMancalaPlayerOne() {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
         playerOne.opponent = playerTwo;
         Pit pit = new Pit(4, playerOne);
+        pit.getNeighbour(4).stones = 0;
+        pit.play(playerOne);
 
-
+        assertEquals(5, pit.getNeighbour(6).getStones());
+        assertEquals(0, pit.getNeighbour(4).getStones());
+        assertEquals(0, pit.getNeighbour(8).getStones());
     }
 
+    @Test
+    public void addStolenStonesToMancalaPlayerTwo() {
+        Player playerOne = new Player("gerard", false);
+        Player playerTwo = new Player("henk", true);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
+        pit.getNeighbour(11).stones = 0;
+        pit.getNeighbour(7).play(playerTwo);
+
+        assertEquals(5, pit.getNeighbour(13).getStones());
+        assertEquals(0, pit.getNeighbour(11).getStones());
+        assertEquals(0, pit.getNeighbour(1).getStones());
+    }
+
+    @Test
+    public void switchActiveAfterPlayerOneMove() {
+        Player playerOne = new Player("gerard", true);
+        Player playerTwo = new Player("henk", false);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
+        pit.play(playerOne);
+
+        assertEquals(false, playerOne.getActive());
+        assertEquals(true, playerTwo.getActive());
+    }
+
+    @Test
+    public void switchActiveAfterPlayerTwoMove() {
+        Player playerOne = new Player("gerard", false);
+        Player playerTwo = new Player("henk", true);
+        playerOne.opponent = playerTwo;
+        playerTwo.opponent = playerOne;
+        Pit pit = new Pit(4, playerOne);
+        pit.play(playerTwo);
+
+        assertEquals(true, playerOne.getActive());
+        assertEquals(false, playerTwo.getActive());
+    }
+
+
+    @Test
+    public void didNotSwitchWhenLastIsMancala() {
+        Player playerOne = new Player("gerard", true);
+        Player playerTwo = new Player("henk", false);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(4, playerOne);
+        pit.getNeighbour(2).play(playerOne);
+
+        assertEquals(true, playerOne.getActive());
+        //assertEquals(false, playerTwo.getActive());
+    }
 
 
 

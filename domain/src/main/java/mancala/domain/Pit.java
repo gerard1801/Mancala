@@ -11,7 +11,6 @@ public class Pit extends Player{
 
     public Pit(int stones, Player player) {
         super(player);
-        //i=0;
         this.neighbour = new Pit(2,this, player);
         this.stones = stones;
         this.owner = player.getName();
@@ -52,13 +51,32 @@ public class Pit extends Player{
         return this.stones;
     }
 
+    public Pit getNeighbour(int index) {
+        if (index > 1) {
+            return this.neighbour.getNeighbour(--index);
+        }
+        return this.neighbour;
+    }
+
     public void play(Player player) {
-        passStonesToNeighbour(this.stones, player);
-        this.stones = 0;
+        if (player.getActive() == true) {
+            passStonesToNeighbour(this.stones, player);
+            this.stones = 0;
+            //if (this instanceof Pit) {
+            switchPlayer(player);
+            //}
+                //switchPlayer(player);
+            //}
+            //switchPlayer(player);
+        }
     }
 
     public void passStonesToNeighbour(int stonesAmount, Player player) {
         if (this instanceof Mancala) {
+            //if (this.owner.equals(player.getName()) && stonesAmount == 0) {
+                //play again;
+                //switchPlayer(player);
+            //}
             if (this.owner.equals(player.getName())) {
                 this.stones++;
                 this.neighbour.passStonesToNeighbour(--stonesAmount, player);
@@ -67,53 +85,38 @@ public class Pit extends Player{
             }
         } else {
             this.stones++;
-            //moet bij 1 kijken, eigen veranderen.
-            if (stonesAmount == 0 && this.stones == 1) {
-                stealStones(player);
-            }
-            else if (stonesAmount > 0) {
+            if (this.stones == 1 && stonesAmount == 0) {
+                int oppositeStones = stealStones(player);
+                addStolenStonesToMancala(player, oppositeStones + this.stones, this);
+                this.stones = 0;
+            } else if (stonesAmount > 0) {
                 this.neighbour.passStonesToNeighbour(--stonesAmount, player);
             }
         }
-
-        //if (stonesAmount == 1) {
-        //    this.stones++;
-        //    this.neighbour.passStonesToNeighbour(--stonesAmount, player);
-        //    stealStones(player);
-            //if (this.owner.equals(player.getName())) { speel nog een keer};
-        //}
     }
 
-    public void stealStones(Player player) {
-        System.out.println("");//if (this.stones = 1) {
+    public int stealStones(Player player) {
+        int oppositeStones = this.getNeighbour(14-2*(this.testIndex%7)).stones;
+        this.getNeighbour(14-2*(this.testIndex%7)).stones = 0;
+        return oppositeStones;
     }
 
-    public Pit getNeighbour(int index) {
-        if (index > 1) {
-            return this.neighbour.getNeighbour(--index);
-        }
-        return this.neighbour;
-        /*this.neighbour = this.neighbour.neighbour;
-            getNeighbour(index - 1);
-            return this.neighbour;
+    public void addStolenStonesToMancala(Player player, int stolenStones, Pit pit) {
+        if (pit instanceof Mancala) {
+            if (player.getName().equals(pit.owner)) {
+                pit.stones += stolenStones;
+            }
         } else {
-            return this.neighbour;
-        }*/
+            addStolenStonesToMancala(player, stolenStones, pit.getNeighbour(1));
+        }
     }
 
-
-    //public void checkIfCurrentPlayerIsOwner() {
-    //    if (player.name == this.owner) {
-    //        return true;
-    //play();
-    //    } else return false;
-    // }
-
-    /*
-    public void play(int index) {
-        this.neighbour = getNeighbour(index);
-        passStonesToNeighbour(this.stones);
-        this.stones = 0;
+    public void switchPlayer(Player player) {
+            player.active = false;
+            player.opponent.active = true;
     }
-    */
+
+    public void didGameFinish() {
+
+    }
 }
