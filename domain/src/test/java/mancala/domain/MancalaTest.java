@@ -10,7 +10,7 @@ public class MancalaTest {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
         playerOne.opponent = playerTwo;
-        Pit pit = new Pit(4);
+        Pit pit = new Pit(playerOne);
         assertEquals(0, pit.getNeighbour(6).getStones());
     }
 
@@ -19,7 +19,7 @@ public class MancalaTest {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
         playerOne.opponent = playerTwo;
-        Pit pit = new Pit(4);
+        Pit pit = new Pit(playerOne);
         assertEquals(0, pit.getNeighbour(13).getStones());
     }
 
@@ -28,7 +28,7 @@ public class MancalaTest {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
         playerOne.opponent = playerTwo;
-        Pit pit = new Pit(4, playerOne);
+        Pit pit = new Pit(playerOne);
         assertEquals("gerard", pit.getNeighbour(6).owner);
     }
 
@@ -37,7 +37,7 @@ public class MancalaTest {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
         playerOne.opponent = playerTwo;
-        Pit pit = new Pit(4, playerOne);
+        Pit pit = new Pit(playerOne);
         assertEquals("henk", pit.getNeighbour(13).owner);
     }
 }

@@ -6,6 +6,7 @@ public class Player {
     public String name;
     public boolean active;
     public Player opponent;
+    public String winner;
 
     public Player() {
     }
@@ -21,6 +22,11 @@ public class Player {
         this.opponent = opponent;
     }
 
+    public void switchPlayer(Player player, Pit pit) {
+            player.active = false;
+            player.opponent.active = true;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -28,4 +34,10 @@ public class Player {
     public boolean getActive(){
         return this.active;
     }
+
+    public void setWinner(String winner) {
+        this.winner = winner; }
+
+    public String getWinner() {
+        return this.winner; }
 }

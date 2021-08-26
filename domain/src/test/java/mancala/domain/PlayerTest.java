@@ -22,13 +22,24 @@ public class PlayerTest {
         playerOne.opponent = playerTwo;
         assertEquals(true, playerOne.getActive());
         assertEquals(false, playerTwo.getActive());
-
     }
 /*
     @Test
-    public void PlayerOneIsActive() {
-        Player playerOne = new Player();
-        assertEquals(true, playerOne.active);
+    public void checkWinner() {
+        Player playerOne = new Player("gerard", true);
+        Player playerTwo = new Player("henk", false);
+        playerOne.opponent = playerTwo;
+        Pit pit = new Pit(playerOne);
+        pit.stones = 0;
+        pit.getNeighbour(1).stones = 0;
+        pit.getNeighbour(2).stones = 0;
+        pit.getNeighbour(3).stones = 0;
+        pit.getNeighbour(4).stones = 0;
+        pit.getNeighbour(5).stones = 1;
+        pit.getNeighbour(5).play(playerOne);
+        //pit.setWinner("gerard");
+        //assertEquals(25, pit.getNeighbour(6).getStones());
+        assertEquals("gerard", pit.getWinner());
     }
 */
 }

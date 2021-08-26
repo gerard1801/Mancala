@@ -7,20 +7,15 @@ public class Pit extends Player{
     public String owner;
 
     public int testIndex;
+    public int stonesLeft;
 
 
-    public Pit(int stones, Player player) {
+
+    public Pit(Player player) {
         super(player);
         this.neighbour = new Pit(2,this, player);
-        this.stones = stones;
+        this.stones = 4;
         this.owner = player.getName();
-        this.testIndex = 1;
-    }
-
-    //only tests
-    public Pit(int stones) {
-        this.neighbour = new Pit(2, this, new Player("gerardTest", true));
-        this.stones = stones;
         this.testIndex = 1;
     }
 
@@ -62,27 +57,27 @@ public class Pit extends Player{
         if (player.getActive() == true) {
             passStonesToNeighbour(this.stones, player);
             this.stones = 0;
-            //if (this instanceof Pit) {
-            switchPlayer(player);
-            //}
-                //switchPlayer(player);
-            //}
-            //switchPlayer(player);
+            didGameFinish(this);
+            System.out.println("testindex: " + this.testIndex);
+            if (this.stonesLeft > 0) {
+                switchPlayer(player, this);
+            }
         }
     }
 
     public void passStonesToNeighbour(int stonesAmount, Player player) {
+        //System.out.println(stonesAmount);
         if (this instanceof Mancala) {
-            //if (this.owner.equals(player.getName()) && stonesAmount == 0) {
-                //play again;
-                //switchPlayer(player);
+            //if (stonesAmount == 0 && this.owner.equals(player.getName())) {
+            //    this.stones ++;
             //}
-            if (this.owner.equals(player.getName())) {
+            if (this.owner.equals(player.getName()) && stonesAmount > 0) {
                 this.stones++;
                 this.neighbour.passStonesToNeighbour(--stonesAmount, player);
             } else {
                 this.neighbour.passStonesToNeighbour(stonesAmount, player);
             }
+            //return this;
         } else {
             this.stones++;
             if (this.stones == 1 && stonesAmount == 0) {
@@ -92,6 +87,7 @@ public class Pit extends Player{
             } else if (stonesAmount > 0) {
                 this.neighbour.passStonesToNeighbour(--stonesAmount, player);
             }
+            //return this;
         }
     }
 
@@ -111,12 +107,42 @@ public class Pit extends Player{
         }
     }
 
-    public void switchPlayer(Player player) {
-            player.active = false;
-            player.opponent.active = true;
+    public void didGameFinish(Pit pit) {
+        if (pit instanceof Mancala) {
+            int stonesLeftInPit = pit.getNeighbour(8).stones + pit.getNeighbour(9).stones + pit.getNeighbour(10).stones +
+                    pit.getNeighbour(11).stones + pit.getNeighbour(12).stones + pit.getNeighbour(13).stones;
+            if (stonesLeftInPit == 0) {
+                int opponentStonesLeft = pit.getNeighbour(15).stones + pit.getNeighbour(16).stones + pit.getNeighbour(17).stones +
+                        pit.getNeighbour(18).stones + pit.getNeighbour(19).stones + pit.getNeighbour(20).stones;
+                pit.stones += opponentStonesLeft;
+                checkWinner(pit);
+            } else{
+                setStonesLeftInPits(stonesLeftInPit);
+            }
+        } else {
+            didGameFinish(pit.getNeighbour(1));
+        }
     }
 
-    public void didGameFinish() {
+    public void checkWinner(Pit pit) {
+        if (pit.stones > pit.getNeighbour(7).stones) {
+            System.out.println(pit.owner + " has won the game!");
+            pit.setWinner(pit.owner);
 
+        } else if (pit.stones < pit.getNeighbour(7).stones){
+            System.out.println(pit.getNeighbour(7).owner + " has won the game!");
+            pit.setWinner(pit.getNeighbour(7).owner);
+
+        } else {
+            System.out.println("The game ended in a draw.");
+            pit.setWinner("draw");
+        }
     }
+
+    private void setStonesLeftInPits(int stonesLeft) { this.stonesLeft = stonesLeft; }
+
+    public int getStonesLeftInPits() { return this.stonesLeft; }
+
+
+
 }
