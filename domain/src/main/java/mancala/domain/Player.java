@@ -23,8 +23,13 @@ public class Player {
     }
 
     public void switchPlayer(Player player, Pit pit) {
+        if (player.active == false) {
+            player.active = true;
+            player.opponent.active = false;
+        } else {
             player.active = false;
             player.opponent.active = true;
+        }
     }
 
     public String getName() {
@@ -36,8 +41,10 @@ public class Player {
     }
 
     public void setWinner(String winner) {
-        this.winner = winner; }
+        this.winner = winner;
+    }
 
     public String getWinner() {
-        return this.winner; }
+        return this.winner;
+    }
 }

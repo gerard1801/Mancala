@@ -9,8 +9,6 @@ public class Pit extends Player{
     public int testIndex;
     public int stonesLeft;
 
-
-
     public Pit(Player player) {
         super(player);
         this.neighbour = new Pit(2,this, player);
@@ -42,10 +40,6 @@ public class Pit extends Player{
         }
     }
 
-    public int getStones() {
-        return this.stones;
-    }
-
     public Pit getNeighbour(int index) {
         if (index > 1) {
             return this.neighbour.getNeighbour(--index);
@@ -58,7 +52,7 @@ public class Pit extends Player{
             passStonesToNeighbour(this.stones, player);
             this.stones = 0;
             didGameFinish(this);
-            System.out.println("testindex: " + this.testIndex);
+
             if (this.stonesLeft > 0) {
                 switchPlayer(player, this);
             }
@@ -66,18 +60,16 @@ public class Pit extends Player{
     }
 
     public void passStonesToNeighbour(int stonesAmount, Player player) {
-        //System.out.println(stonesAmount);
         if (this instanceof Mancala) {
-            //if (stonesAmount == 0 && this.owner.equals(player.getName())) {
-            //    this.stones ++;
-            //}
+            if (stonesAmount == 0 && this.owner.equals(player.getName())) {
+                switchPlayer(player, this);
+            }
             if (this.owner.equals(player.getName()) && stonesAmount > 0) {
                 this.stones++;
                 this.neighbour.passStonesToNeighbour(--stonesAmount, player);
             } else {
                 this.neighbour.passStonesToNeighbour(stonesAmount, player);
             }
-            //return this;
         } else {
             this.stones++;
             if (this.stones == 1 && stonesAmount == 0) {
@@ -87,7 +79,6 @@ public class Pit extends Player{
             } else if (stonesAmount > 0) {
                 this.neighbour.passStonesToNeighbour(--stonesAmount, player);
             }
-            //return this;
         }
     }
 
@@ -143,6 +134,7 @@ public class Pit extends Player{
 
     public int getStonesLeftInPits() { return this.stonesLeft; }
 
+    public int getStones() { return this.stones; }
 
 
 }

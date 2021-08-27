@@ -143,31 +143,6 @@ public class PitTest {
     }
 
     @Test
-    public void switchActiveAfterPlayerOneMove() {
-        Player playerOne = new Player("gerard", true);
-        Player playerTwo = new Player("henk", false);
-        playerOne.opponent = playerTwo;
-        Pit pit = new Pit(playerOne);
-        pit.play(playerOne);
-
-        assertEquals(false, playerOne.getActive());
-        assertEquals(true, playerTwo.getActive());
-    }
-
-    @Test
-    public void switchActiveAfterPlayerTwoMove() {
-        Player playerOne = new Player("gerard", false);
-        Player playerTwo = new Player("henk", true);
-        playerOne.opponent = playerTwo;
-        playerTwo.opponent = playerOne;
-        Pit pit = new Pit(playerOne);
-        pit.play(playerTwo);
-
-        assertEquals(true, playerOne.getActive());
-        assertEquals(false, playerTwo.getActive());
-    }
-
-    @Test
     public void StonesAddedToMancalaWhenGameIsFinished() {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
@@ -184,20 +159,23 @@ public class PitTest {
         assertEquals(25, pit.getNeighbour(6).getStones());
     }
 
+    /*
     @Test
-    public void didNotSwitchWhenLastIsMancala() {
+    public void checkWinner() {
         Player playerOne = new Player("gerard", true);
         Player playerTwo = new Player("henk", false);
         playerOne.opponent = playerTwo;
         Pit pit = new Pit(playerOne);
-        pit.getNeighbour(2).play(playerOne);
-
-        assertEquals(true, playerOne.getActive());
-        //assertEquals(false, playerTwo.getActive());
+        pit.stones = 0;
+        pit.getNeighbour(1).stones = 0;
+        pit.getNeighbour(2).stones = 0;
+        pit.getNeighbour(3).stones = 0;
+        pit.getNeighbour(4).stones = 0;
+        pit.getNeighbour(5).stones = 1;
+        pit.getNeighbour(5).play(playerOne);
+        //pit.setWinner("gerard");
+        //assertEquals(25, pit.getNeighbour(6).getStones());
+        assertEquals("gerard", pit.getWinner());
     }
-
-
-
-
-
+    */
 }
