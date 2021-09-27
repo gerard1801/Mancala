@@ -17,10 +17,11 @@ public class StartMancala {
 	public Response initialize(
 			@Context HttpServletRequest request, 
 			PlayerInput players) {
+
         var mancala = new MancalaImpl();
         String namePlayer1 = players.getNameplayer1();
 		String namePlayer2 = players.getNameplayer2();
-		
+
         HttpSession session = request.getSession(true);
         session.setAttribute("mancala", mancala);
         session.setAttribute("player1", namePlayer1);

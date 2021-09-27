@@ -1,1 +1,31 @@
 /** Add some styles */
+
+#p1Button6, #p2Button6 {
+    height: 200px;
+    width: 50px;
+    border-radius: 10%;
+}
+
+#p1Button0, #p1Button1, #p1Button2 , #p1Button3, #p1Button4, #p1Button5 {
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    top: 50px;
+    left: -22%;
+    margin-left: 20px;
+}
+
+#p2Button0, #p2Button1, #p2Button2, #p2Button3, #p2Button4, #p2Button5 {
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    top: -50px;
+    left: 22%;
+}
+
+#Board {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

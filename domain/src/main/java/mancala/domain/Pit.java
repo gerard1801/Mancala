@@ -29,12 +29,12 @@ public class Pit extends Player{
         if (i < 6) {
             this.neighbour = new Pit(i+1, pit, player);
         } else if (i == 6) {
-            this.neighbour = new Mancala(i+1, pit, player);
+            this.neighbour = new Calaha(i+1, pit, player);
         } else if (i < 13) {
             this.neighbour = new Pit(i+1, pit, player);
         }
         else if (i == 13){
-            this.neighbour = new Mancala(i+1, pit, player);
+            this.neighbour = new Calaha(i+1, pit, player);
         } else if (i == 14) {
             this.neighbour = pit;
         }
@@ -60,7 +60,7 @@ public class Pit extends Player{
     }
 
     public void passStonesToNeighbour(int stonesAmount, Player player) {
-        if (this instanceof Mancala) {
+        if (this instanceof Calaha) {
             if (stonesAmount == 0 && this.owner.equals(player.getName())) {
                 switchPlayer(player, this);
             }
@@ -89,7 +89,7 @@ public class Pit extends Player{
     }
 
     public void addStolenStonesToMancala(Player player, int stolenStones, Pit pit) {
-        if (pit instanceof Mancala) {
+        if (pit instanceof Calaha) {
             if (player.getName().equals(pit.owner)) {
                 pit.stones += stolenStones;
             }
@@ -99,7 +99,7 @@ public class Pit extends Player{
     }
 
     public void didGameFinish(Pit pit) {
-        if (pit instanceof Mancala) {
+        if (pit instanceof Calaha) {
             int stonesLeftInPit = pit.getNeighbour(8).stones + pit.getNeighbour(9).stones + pit.getNeighbour(10).stones +
                     pit.getNeighbour(11).stones + pit.getNeighbour(12).stones + pit.getNeighbour(13).stones;
             if (stonesLeftInPit == 0) {
@@ -110,6 +110,7 @@ public class Pit extends Player{
             } else{
                 setStonesLeftInPits(stonesLeftInPit);
             }
+            System.out.println(stonesLeftInPit);
         } else {
             didGameFinish(pit.getNeighbour(1));
         }
@@ -135,6 +136,5 @@ public class Pit extends Player{
     public int getStonesLeftInPits() { return this.stonesLeft; }
 
     public int getStones() { return this.stones; }
-
 
 }

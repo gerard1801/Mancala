@@ -44,7 +44,7 @@ public class Player {
         this.winner = winner;
     }
 
-    public String getWinner() {
+    public String getGameWinner() {
         return this.winner;
     }
 }
