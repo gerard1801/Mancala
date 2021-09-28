@@ -10,7 +10,7 @@ public class PitTest {
     public void PitHas4Stones() {
         Player playerOne = new Player("gerard", true);
         Pit pit = new Pit(playerOne);
-        assertEquals(4, pit.getStones());
+        assertEquals(3, pit.getStones());
     }
 
     @Test
