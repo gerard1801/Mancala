@@ -39,7 +39,8 @@ test:
     paths:
       - build/test-results/test/TEST-*.xml
     reports:
-      junit: build/test-results/test/TEST-*.xml
+      junit: api/build/test-results/test/TEST-*.xml
+             domain/build/test-results/test/TEST-*.xml
 
   cache:
     key: "$CI_COMMIT_REF_NAME"
