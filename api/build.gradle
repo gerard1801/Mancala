@@ -48,7 +48,7 @@ application {
 jacocoTestReport {
     reports {
         csv.enabled true
-        csv.destination file("${buildDir}/jacocoCsv")
+        csv.destination file("/jacocoCsv")
     }
     // ... Additional configuration for JaCoCo
 }
