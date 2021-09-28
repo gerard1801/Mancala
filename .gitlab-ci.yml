@@ -36,8 +36,11 @@ test:
   script: gradle test
   artifacts:
     when: always
+    paths:
+      - target/JUnitReport/
+    expire_in: 1 week
     reports:
-      junit: build/test-results/test/**/TEST-*.xml
+      junit: target/JUnitReport/report.xml
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
