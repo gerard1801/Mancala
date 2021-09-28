@@ -35,8 +35,11 @@ test:
   stage: test
   script: gradle test
   artifacts:
+    when: always
+    paths:
+      - build/test-results/test/TEST-*.xml
     reports:
-      junit: build/test-results/test/TEST-1.xml
+      junit: build/test-results/test/TEST-*.xml
 
   cache:
     key: "$CI_COMMIT_REF_NAME"
