@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mancala.domain.PitTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2021-09-28T09:48:42" hostname="MBP-van-Gerard.sogyo.nl" time="0.039">
+  <properties/>
+  <testcase name="StonesAddedToMancalaWhenGameIsFinished()" classname="mancala.domain.PitTest" time="0.024"/>
+  <testcase name="AddStonesToNeighboursOnIndexOwnerIsTrue()" classname="mancala.domain.PitTest" time="0.001"/>
+  <testcase name="StealStones()" classname="mancala.domain.PitTest" time="0.001"/>
+  <testcase name="passMancalaIfOwnerIncorrect()" classname="mancala.domain.PitTest" time="0.0"/>
+  <testcase name="passStonesToNeighboursAndAddOne()" classname="mancala.domain.PitTest" time="0.0"/>
+  <testcase name="AddStonesToNeighboursOnIndexOwnerIsFalse()" classname="mancala.domain.PitTest" time="0.001"/>
+  <testcase name="addStolenStonesToMancalaPlayerOne()" classname="mancala.domain.PitTest" time="0.001"/>
+  <testcase name="addStolenStonesToMancalaPlayerTwo()" classname="mancala.domain.PitTest" time="0.001"/>
+  <testcase name="PitHas4Stones()" classname="mancala.domain.PitTest" time="0.0"/>
+  <testcase name="checkOwners()" classname="mancala.domain.PitTest" time="0.001"/>
+  <testcase name="pitHasANeigbour()" classname="mancala.domain.PitTest" time="0.0"/>
+  <testcase name="pitIsEmptyAfterPlay()" classname="mancala.domain.PitTest" time="0.001"/>
+  <testcase name="getNeigbourBasedOnIndex()" classname="mancala.domain.PitTest" time="0.001"/>
+  <system-out><![CDATA[gerard has won the game!
+0
+21
+19
+21
+24
+19
+19
+24
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

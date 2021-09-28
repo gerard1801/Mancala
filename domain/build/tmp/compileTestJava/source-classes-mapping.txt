@@ -1,0 +1,8 @@
+mancala/domain/FooTest.java
+ mancala.domain.FooTest
+mancala/domain/MancalaTest.java
+ mancala.domain.MancalaTest
+mancala/domain/PlayerTest.java
+ mancala.domain.PlayerTest
+mancala/domain/PitTest.java
+ mancala.domain.PitTest

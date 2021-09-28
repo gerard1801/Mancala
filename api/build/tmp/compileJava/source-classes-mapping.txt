@@ -1,0 +1,18 @@
+mancala/api/models/Player.java
+ mancala.api.models.Player
+mancala/App.java
+ mancala.App
+mancala/api/models/Mancala.java
+ mancala.api.models.Mancala
+mancala/api/models/pitIndex.java
+ mancala.api.models.pitIndex
+mancala/api/models/PlayerInput.java
+ mancala.api.models.PlayerInput
+mancala/api/models/Pit.java
+ mancala.api.models.Pit
+mancala/api/models/GameStatus.java
+ mancala.api.models.GameStatus
+mancala/api/StartMancala.java
+ mancala.api.StartMancala
+mancala/api/pitPlay.java
+ mancala.api.pitPlay

@@ -1,0 +1,14 @@
+mancala/domain/Player.java
+ mancala.domain.Player
+mancala/domain/MancalaException.java
+ mancala.domain.MancalaException
+mancala/domain/Calaha.java
+ mancala.domain.Calaha
+mancala/domain/Mancala.java
+ mancala.domain.Mancala
+mancala/domain/Pit.java
+ mancala.domain.Pit
+mancala/domain/Foo.java
+ mancala.domain.Foo
+mancala/domain/MancalaImpl.java
+ mancala.domain.MancalaImpl

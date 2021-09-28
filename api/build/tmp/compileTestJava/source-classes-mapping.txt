@@ -1,0 +1,2 @@
+mancala/api/StartMancalaTest.java
+ mancala.api.StartMancalaTest
