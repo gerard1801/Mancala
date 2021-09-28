@@ -16,7 +16,16 @@ dependencies {
     testRuntimeOnly "org.junit.platform:junit-platform-commons:1.7.0"
 }
 
+jacocoTestReport {
+    reports {
+        csv.enabled true
+        csv.destination file("${buildDir}/jacocoCsv")
+    }
+    // ... Additional configuration for JaCoCo
+}
+
 test {
     // For running our tests, use the test runner provided by JUnit.
     useJUnitPlatform()
+    finalizedBy("jacocoTestReport")
 }
