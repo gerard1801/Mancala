@@ -47,25 +47,16 @@ test:
 jacocoTestReport:
   stage: test
   script:
-    - 'gradle test jacocoTestReport' # jacoco must be configured to create an xml report
+    - 'gradle test jacocoTestReport'
+    - - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, " instructions covered"; print 100*covered/instructions, "% covered" }' $JACOCO_CSV_LOCATION # jacoco must be configured to create an xml report
   artifacts:
     when: always
     reports:
     paths:
-      - api/build/reports/jacoco/test/jacocoTestReport.xml
+      - api/build/reports/jacoco/test/jacocoTestReport.csv
+      - domain/build/reports/jacoco/test/jacocoTestReport.csv
 
-pages:
-  stage: deploy
-  dependencies:
-    - jacocoTestReport
-  script:
-   - mkdir public
-   - mv api/build/reports/jacoco/test/html/* public
-  artifacts:
-    paths:
-      - public
-  only:
-  - mvc
+
 
 cache:
   key: "$CI_COMMIT_REF_NAME"
