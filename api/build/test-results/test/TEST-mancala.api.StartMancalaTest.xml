@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="mancala.api.StartMancalaTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-09-28T09:48:41" hostname="MBP-van-Gerard.sogyo.nl" time="0.68">
+<testsuite name="mancala.api.StartMancalaTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-09-29T07:50:12" hostname="MacBook-Pro-van-Gerard.local" time="1.053">
   <properties/>
-  <testcase name="startingMancalaReturnsAGameWithoutAWinner()" classname="mancala.api.StartMancalaTest" time="0.656"/>
-  <testcase name="startingMancalaShouldBeAllowed()" classname="mancala.api.StartMancalaTest" time="0.003"/>
-  <testcase name="startingMancalaStartsANewSession()" classname="mancala.api.StartMancalaTest" time="0.007"/>
+  <testcase name="startingMancalaReturnsAGameWithoutAWinner()" classname="mancala.api.StartMancalaTest" time="1.023"/>
+  <testcase name="startingMancalaShouldBeAllowed()" classname="mancala.api.StartMancalaTest" time="0.004"/>
+  <testcase name="startingMancalaStartsANewSession()" classname="mancala.api.StartMancalaTest" time="0.01"/>
   <testcase name="startingMancalaSavesTheNamesInASession()" classname="mancala.api.StartMancalaTest" time="0.002"/>
-  <testcase name="startingMancalaSavesTheNewGameInASession()" classname="mancala.api.StartMancalaTest" time="0.003"/>
-  <testcase name="startingMancalaReturnsThePlayerData()" classname="mancala.api.StartMancalaTest" time="0.003"/>
+  <testcase name="startingMancalaSavesTheNewGameInASession()" classname="mancala.api.StartMancalaTest" time="0.005"/>
+  <testcase name="startingMancalaReturnsThePlayerData()" classname="mancala.api.StartMancalaTest" time="0.004"/>
   <testcase name="startingMancalaReturnsThePits()" classname="mancala.api.StartMancalaTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

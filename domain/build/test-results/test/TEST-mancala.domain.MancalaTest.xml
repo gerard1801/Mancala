@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="mancala.domain.MancalaTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-09-28T09:48:42" hostname="MBP-van-Gerard.sogyo.nl" time="0.003">
+<testsuite name="mancala.domain.MancalaTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-09-29T07:50:14" hostname="MacBook-Pro-van-Gerard.local" time="0.003">
   <properties/>
-  <testcase name="PitOfSecondMancalaIsEmpty()" classname="mancala.domain.MancalaTest" time="0.001"/>
-  <testcase name="PitOfFirstMancalaIsEmpty()" classname="mancala.domain.MancalaTest" time="0.001"/>
+  <testcase name="PitOfSecondMancalaIsEmpty()" classname="mancala.domain.MancalaTest" time="0.0"/>
+  <testcase name="PitOfFirstMancalaIsEmpty()" classname="mancala.domain.MancalaTest" time="0.0"/>
   <testcase name="CheckFirstMancalaOwner()" classname="mancala.domain.MancalaTest" time="0.0"/>
-  <testcase name="CheckSecondMancalaOwner()" classname="mancala.domain.MancalaTest" time="0.0"/>
+  <testcase name="CheckSecondMancalaOwner()" classname="mancala.domain.MancalaTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
