@@ -44,11 +44,18 @@ test:
         - api/build/test-results/test/TEST-*.xml
         - domain/build/test-results/test/TEST-*.xml
 
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
+test-jdk11:
+  stage: test
+  image: gradle:6.6.1-jdk11
+  script:
+    - 'gradle test jacocoTestReport' # jacoco must be configured to create an xml report
+  artifacts:
     paths:
-      - build
-      - .gradle
+      - build/jacoco/jacoco.xml
 
-
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  policy: pull
+  paths:
+    - build
+    - .gradle
