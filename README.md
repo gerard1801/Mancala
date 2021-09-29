@@ -1,3 +1,5 @@
+[![coverage report](https://git.sogyo.nl/gvdwel/mancala-java/badges/mvc/coverage.svg)](https://git.sogyo.nl/gvdwel/mancala-java/-/commits/mvc)
+
 # Mancala
 
 This repository contains the files for three modules:
