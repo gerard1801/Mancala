@@ -52,7 +52,7 @@ jacocoTestReport:
     when: always
     reports:
     paths:
-      - api/build/jacoco/
+      - api/build/reports/jacoco/
 
 cache:
   key: "$CI_COMMIT_REF_NAME"
