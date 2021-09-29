@@ -62,7 +62,7 @@ jacocoTestReport:
 pages:
   stage: deploy
   dependencies:
-    - test
+    - jacocoTestReport
   script:
    - mkdir public
    - mv api/build/reports/jacoco/test/html/index.html public/
