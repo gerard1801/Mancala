@@ -54,6 +54,19 @@ jacocoTestReport:
     paths:
       - api/build/reports/jacoco/test/jacocoTestReport.xml
 
+pages:
+  stage: deploy
+  dependencies:
+    - jacocoTestReport
+  script:
+   - mkdir public
+   - mv api/build/reports/jacoco/test/html/* public
+  artifacts:
+    paths:
+      - public
+  only:
+  - mvc
+
 cache:
   key: "$CI_COMMIT_REF_NAME"
   policy: pull
