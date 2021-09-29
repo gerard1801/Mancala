@@ -71,7 +71,7 @@ pages:
     paths:
       - public
   only:
-  - mvc
+    - mvc
 
 
 cache:
