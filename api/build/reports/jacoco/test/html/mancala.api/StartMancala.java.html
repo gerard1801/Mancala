@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StartMancala.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">api</a> &gt; <a href="index.source.html" class="el_package">mancala.api</a> &gt; <span class="el_source">StartMancala.java</span></div><h1>StartMancala.java</h1><pre class="source lang-java linenums">package mancala.api;
+
+import java.io.IOException;
+import jakarta.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
+
+import mancala.api.models.*;
+import mancala.domain.MancalaImpl;
+
+@Path(&quot;/start&quot;)
+<span class="fc" id="L13">public class StartMancala {</span>
+    @POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response initialize(
+			@Context HttpServletRequest request, 
+			PlayerInput players) {
+
+<span class="fc" id="L21">        var mancala = new MancalaImpl();</span>
+<span class="fc" id="L22">        String namePlayer1 = players.getNameplayer1();</span>
+<span class="fc" id="L23">		String namePlayer2 = players.getNameplayer2();</span>
+
+<span class="fc" id="L25">        HttpSession session = request.getSession(true);</span>
+<span class="fc" id="L26">        session.setAttribute(&quot;mancala&quot;, mancala);</span>
+<span class="fc" id="L27">        session.setAttribute(&quot;player1&quot;, namePlayer1);</span>
+<span class="fc" id="L28">        session.setAttribute(&quot;player2&quot;, namePlayer2);</span>
+
+<span class="fc" id="L30">		var output = new Mancala(mancala, namePlayer1, namePlayer2);</span>
+<span class="fc" id="L31">		return Response.status(200).entity(output).build();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

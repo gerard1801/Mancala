@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Pit.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">domain</a> &gt; <a href="index.source.html" class="el_package">mancala.domain</a> &gt; <span class="el_source">Pit.java</span></div><h1>Pit.java</h1><pre class="source lang-java linenums">package mancala.domain;
+
+public class Pit extends Player{
+
+    public Pit neighbour;
+    protected int stones;
+    public String owner;
+
+    public int testIndex;
+    public int stonesLeft;
+
+    public Pit(Player player) {
+<span class="fc" id="L13">        super(player);</span>
+<span class="fc" id="L14">        this.neighbour = new Pit(2,this, player);</span>
+<span class="fc" id="L15">        this.stones = 4;</span>
+<span class="fc" id="L16">        this.owner = player.getName();</span>
+<span class="fc" id="L17">        this.testIndex = 1;</span>
+<span class="fc" id="L18">    }</span>
+
+    public Pit(int i, Pit pit, Player player) {
+<span class="fc" id="L21">        super(player);</span>
+<span class="fc" id="L22">        this.testIndex = i;</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if(i&lt;=7){</span>
+<span class="fc" id="L24">            this.owner = player.name;</span>
+        } else {
+<span class="fc" id="L26">            this.owner=player.opponent.name;</span>
+        }
+<span class="fc" id="L28">        this.stones=4;</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (i &lt; 6) {</span>
+<span class="fc" id="L30">            this.neighbour = new Pit(i+1, pit, player);</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        } else if (i == 6) {</span>
+<span class="fc" id="L32">            this.neighbour = new Calaha(i+1, pit, player);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        } else if (i &lt; 13) {</span>
+<span class="fc" id="L34">            this.neighbour = new Pit(i+1, pit, player);</span>
+        }
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        else if (i == 13){</span>
+<span class="fc" id="L37">            this.neighbour = new Calaha(i+1, pit, player);</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        } else if (i == 14) {</span>
+<span class="fc" id="L39">            this.neighbour = pit;</span>
+        }
+<span class="fc" id="L41">    }</span>
+
+    public Pit getNeighbour(int index) {
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (index &gt; 1) {</span>
+<span class="fc" id="L45">            return this.neighbour.getNeighbour(--index);</span>
+        }
+<span class="fc" id="L47">        return this.neighbour;</span>
+    }
+
+    public void play(Player player) {
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (player.getActive() == true) {</span>
+<span class="fc" id="L52">            passStonesToNeighbour(this.stones, player);</span>
+<span class="fc" id="L53">            this.stones = 0;</span>
+<span class="fc" id="L54">            didGameFinish(this);</span>
+
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (this.stonesLeft &gt; 0) {</span>
+<span class="fc" id="L57">                switchPlayer(player, this);</span>
+            }
+        }
+<span class="fc" id="L60">    }</span>
+
+    public void passStonesToNeighbour(int stonesAmount, Player player) {
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (this instanceof Calaha) {</span>
+<span class="fc bfc" id="L64" title="All 4 branches covered.">            if (stonesAmount == 0 &amp;&amp; this.owner.equals(player.getName())) {</span>
+<span class="fc" id="L65">                switchPlayer(player, this);</span>
+            }
+<span class="fc bfc" id="L67" title="All 4 branches covered.">            if (this.owner.equals(player.getName()) &amp;&amp; stonesAmount &gt; 0) {</span>
+<span class="fc" id="L68">                this.stones++;</span>
+<span class="fc" id="L69">                this.neighbour.passStonesToNeighbour(--stonesAmount, player);</span>
+            } else {
+<span class="fc" id="L71">                this.neighbour.passStonesToNeighbour(stonesAmount, player);</span>
+            }
+        } else {
+<span class="fc" id="L74">            this.stones++;</span>
+<span class="pc bpc" id="L75" title="1 of 4 branches missed.">            if (this.stones == 1 &amp;&amp; stonesAmount == 0) {</span>
+<span class="fc" id="L76">                int oppositeStones = stealStones(player);</span>
+<span class="fc" id="L77">                addStolenStonesToMancala(player, oppositeStones + this.stones, this);</span>
+<span class="fc" id="L78">                this.stones = 0;</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            } else if (stonesAmount &gt; 0) {</span>
+<span class="fc" id="L80">                this.neighbour.passStonesToNeighbour(--stonesAmount, player);</span>
+            }
+        }
+<span class="fc" id="L83">    }</span>
+
+    public int stealStones(Player player) {
+<span class="fc" id="L86">        int oppositeStones = this.getNeighbour(14-2*(this.testIndex%7)).stones;</span>
+<span class="fc" id="L87">        this.getNeighbour(14-2*(this.testIndex%7)).stones = 0;</span>
+<span class="fc" id="L88">        return oppositeStones;</span>
+    }
+
+    public void addStolenStonesToMancala(Player player, int stolenStones, Pit pit) {
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (pit instanceof Calaha) {</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">            if (player.getName().equals(pit.owner)) {</span>
+<span class="fc" id="L94">                pit.stones += stolenStones;</span>
+            }
+        } else {
+<span class="fc" id="L97">            addStolenStonesToMancala(player, stolenStones, pit.getNeighbour(1));</span>
+        }
+<span class="fc" id="L99">    }</span>
+
+    public void didGameFinish(Pit pit) {
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (pit instanceof Calaha) {</span>
+<span class="fc" id="L103">            int stonesLeftInPit = pit.getNeighbour(8).stones + pit.getNeighbour(9).stones + pit.getNeighbour(10).stones +</span>
+<span class="fc" id="L104">                    pit.getNeighbour(11).stones + pit.getNeighbour(12).stones + pit.getNeighbour(13).stones;</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">            if (stonesLeftInPit == 0) {</span>
+<span class="fc" id="L106">                int opponentStonesLeft = pit.getNeighbour(15).stones + pit.getNeighbour(16).stones + pit.getNeighbour(17).stones +</span>
+<span class="fc" id="L107">                        pit.getNeighbour(18).stones + pit.getNeighbour(19).stones + pit.getNeighbour(20).stones;</span>
+<span class="fc" id="L108">                pit.stones += opponentStonesLeft;</span>
+<span class="fc" id="L109">                checkWinner(pit);</span>
+<span class="fc" id="L110">            } else{</span>
+<span class="fc" id="L111">                setStonesLeftInPits(stonesLeftInPit);</span>
+            }
+<span class="fc" id="L113">            System.out.println(stonesLeftInPit);</span>
+<span class="fc" id="L114">        } else {</span>
+<span class="fc" id="L115">            didGameFinish(pit.getNeighbour(1));</span>
+        }
+<span class="fc" id="L117">    }</span>
+
+    public void checkWinner(Pit pit) {
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (pit.stones &gt; pit.getNeighbour(7).stones) {</span>
+<span class="fc" id="L121">            System.out.println(pit.owner + &quot; has won the game!&quot;);</span>
+<span class="fc" id="L122">            pit.setWinner(pit.owner);</span>
+
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        } else if (pit.stones &lt; pit.getNeighbour(7).stones){</span>
+<span class="nc" id="L125">            System.out.println(pit.getNeighbour(7).owner + &quot; has won the game!&quot;);</span>
+<span class="nc" id="L126">            pit.setWinner(pit.getNeighbour(7).owner);</span>
+
+        } else {
+<span class="nc" id="L129">            System.out.println(&quot;The game ended in a draw.&quot;);</span>
+<span class="nc" id="L130">            pit.setWinner(&quot;draw&quot;);</span>
+        }
+<span class="fc" id="L132">    }</span>
+
+<span class="fc" id="L134">    private void setStonesLeftInPits(int stonesLeft) { this.stonesLeft = stonesLeft; }</span>
+
+<span class="nc" id="L136">    public int getStonesLeftInPits() { return this.stonesLeft; }</span>
+
+<span class="fc" id="L138">    public int getStones() { return this.stones; }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
