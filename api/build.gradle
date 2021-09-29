@@ -45,16 +45,7 @@ application {
     mainClassName = 'mancala.App'
 }
 
-jacocoTestReport {
-    reports {
-        csv.enabled true
-        csv.destination file("/jacocoCsv")
-    }
-    // ... Additional configuration for JaCoCo
-}
-
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
-    finalizedBy("jacocoTestReport")
 }
