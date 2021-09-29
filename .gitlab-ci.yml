@@ -50,7 +50,7 @@ jacocoTestReport:
     - 'gradle test jacocoTestReport' # jacoco must be configured to create an xml report
   artifacts:
     paths:
-      - api/build/jacoco/jacoco.xml
+      - api/build/jacoco/
 
 cache:
   key: "$CI_COMMIT_REF_NAME"
