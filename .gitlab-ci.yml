@@ -66,6 +66,7 @@ pages:
   script:
    - mkdir public
    - mv api/build/reports/jacoco/test/html/* public
+   - mv domain/build/reports/jacoco/test/html/* public
   artifacts:
     paths:
       - public
