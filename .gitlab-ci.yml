@@ -55,9 +55,9 @@ jacocoTestReport:
     reports:
     paths:
       - api/build/reports/jacoco/test/jacocoTestReport.csv
-      - api/build/reports/jacoco/test/html/index.html
+      - api/build/reports/jacoco/test/html/*
       - domain/build/reports/jacoco/test/jacocoTestReport.csv
-      - domain/build/reports/jacoco/test/html/index.html
+      - domain/build/reports/jacoco/test/html/*
 
 pages:
   stage: deploy
