@@ -33,6 +33,27 @@ build:
       - build
       - .gradle
       
+rspec:
+  script:
+    - bundle install
+    - rspec
+  artifacts:
+    paths:
+      - coverage/
+
+pages:
+  stage: deploy
+  dependencies:
+    - rspec
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - mvc
+
 test:
   stage: test
   script: 
@@ -59,19 +80,19 @@ jacocoTestReport:
       - domain/build/reports/jacoco/test/jacocoTestReport.csv
       - domain/build/reports/jacoco/test/html/index.html
 
-pages:
-  stage: deploy
-  dependencies:
-    - jacocoTestReport
-  script:
-   - mkdir public
-   - mv api/build/reports/jacoco/test/html/index.html public/
-   - mv domain/build/reports/jacoco/test/html/index.html public/
-  artifacts:
-    paths:
-      - public
-  only:
-    - mvc
+#pages:
+#  stage: deploy
+#  dependencies:
+#    - jacocoTestReport
+#  script:
+#   - mkdir public
+#   - mv api/build/reports/jacoco/test/html/index.html public/
+#   - mv domain/build/reports/jacoco/test/html/index.html public/
+#  artifacts:
+#    paths:
+#      - public
+#  only:
+#    - mvc
 
 
 cache:
