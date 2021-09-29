@@ -49,6 +49,8 @@ jacocoTestReport:
   script:
     - 'gradle test jacocoTestReport' # jacoco must be configured to create an xml report
   artifacts:
+    when: always
+    reports:
     paths:
       - api/build/jacoco/
 
