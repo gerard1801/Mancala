@@ -49,13 +49,13 @@ jacocoTestReport {
     reports {
         xml.enabled true
         csv.enabled true
-        html.destination "${buildDir}/jacocoHtml"
     }
 }
 
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
-test.finalizedBy jacocoTestReport
+

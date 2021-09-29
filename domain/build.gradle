@@ -21,13 +21,12 @@ jacocoTestReport {
     reports {
         xml.enabled true
         csv.enabled true
-        html.destination "${buildDir}/jacocoHtml"
+
     }
 }
 
 test {
     // For running our tests, use the test runner provided by JUnit.
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
-
-test.finalizedBy jacocoTestReport
