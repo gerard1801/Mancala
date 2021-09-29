@@ -17,9 +17,17 @@ dependencies {
     testRuntimeOnly "org.junit.platform:junit-platform-commons:1.7.0"
 }
 
-
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled true
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
 
 test {
     // For running our tests, use the test runner provided by JUnit.
     useJUnitPlatform()
 }
+
+test.finalizedBy jacocoTestReport
