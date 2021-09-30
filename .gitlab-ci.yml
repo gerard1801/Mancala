@@ -80,6 +80,7 @@ package:
 deploy_staging:
   stage: deploy
   script:
+    - which apk
     - /usr/sbin/apk upgrade && apk update
     - apk add openssh-client
     - apk add sshpass
