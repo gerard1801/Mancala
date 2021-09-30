@@ -83,6 +83,20 @@ deploy_staging:
   services: 
     - docker:dind
   script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl:5050
+    - docker pull git.sogyo.nl:5050/gvdwel/mancala-java:latest
+    - docker run --rm -i -p 4200:80 git.sogyo.nl:5050/gvdwel/mancala-java:latest
+  only:
+    #naar mvc
+    - mvc
+    
+
+deploy_staging:
+  stage: deploy
+  image: docker:latest
+  services: 
+    - docker:dind
+  script:
     - apk upgrade && apk update
     - apk add openssh-client
     - apk add sshpass
@@ -94,4 +108,6 @@ deploy_staging:
     name: staging
     url: https://testmancala.com
   only:
-    - mvc
+    #naar mvc
+    - master
+
