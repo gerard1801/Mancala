@@ -79,9 +79,11 @@ package:
 
 deploy_staging:
   stage: deploy
+  image: docker:latest
+  services: 
+    - docker:dind
   script:
-    - which apk
-    - /usr/sbin/apk upgrade && apk update
+    - apk upgrade && apk update
     - apk add openssh-client
     - apk add sshpass
     - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl:5050
