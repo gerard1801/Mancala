@@ -89,5 +89,6 @@ deploy_staging:
     - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker run --name mancala_container -p 80:80 -d git.sogyo.nl:5050/gvdwel/mancala-java
   environment:
     name: staging
+    url: https://testmancala.com
   only:
     - develop
