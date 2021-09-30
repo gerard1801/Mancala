@@ -17,7 +17,6 @@ image: gradle:6.9.1-jdk11-openj9
 #.
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-  JACOCO_CSV_LOCATION: '$CI_PROJECT_DIR/build/jacocoCsv'
 
 
 before_script:
@@ -44,7 +43,7 @@ test:
         - api/build/test-results/test/TEST-*.xml
         - domain/build/test-results/test/TEST-*.xml
 
-jacocoTestReport:
+jacocoTestReportAPI:
   stage: test
   script:
     - 'gradle test jacocoTestReport'
@@ -59,19 +58,19 @@ jacocoTestReport:
       - domain/build/reports/jacoco/test/jacocoTestReport.csv
       - domain/build/reports/jacoco/test/html/*
 
-pages:
-  stage: deploy
-  dependencies:
-        - jacocoTestReport
-  script:
-   - mkdir public
-   - mv api/build/reports/jacoco/test/html/index.html public/
-   - mv domain/build/reports/jacoco/test/html/index.html public/
-  artifacts:
-    paths:
-      - public
-  only:
-    - mvc
+#pages:
+#  stage: deploy
+#  dependencies:
+#        - jacocoTestReport
+#  script:
+#   - mkdir public
+#   - mv api/build/reports/jacoco/test/html/index.html public/
+#   - mv domain/build/reports/jacoco/test/html/index.html public/
+#  artifacts:
+#    paths:
+#      - public
+#  only:
+#    - mvc
 
 
 cache:
