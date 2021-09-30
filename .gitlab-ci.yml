@@ -77,7 +77,7 @@ package:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl:5050
     - docker push git.sogyo.nl:5050/gvdwel/mancala-java
 
-deploy_staging:
+deploy_staging2:
   stage: deploy
   image: docker:latest
   services: 
@@ -86,6 +86,8 @@ deploy_staging:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl:5050
     - docker pull git.sogyo.nl:5050/gvdwel/mancala-java:latest
     - docker run --rm -i -p 4200:80 git.sogyo.nl:5050/gvdwel/mancala-java:latest
+  environment:
+    name: staging
   only:
     #naar mvc
     - mvc
