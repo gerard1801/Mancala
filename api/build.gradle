@@ -61,7 +61,7 @@ test {
 jar {
     manifest {
         attributes(
-                'App.java': 'com.mancala.App.java'
+                'Main-Class': 'com.mancala.App.java'
         )
     }
 }
