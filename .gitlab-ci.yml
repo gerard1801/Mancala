@@ -91,4 +91,4 @@ deploy_staging:
     name: staging
     url: https://testmancala.com
   only:
-    - develop
+    - mvc
