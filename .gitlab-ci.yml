@@ -4,6 +4,7 @@ stages:
   - build
   - test
   - package
+  - deploy
 
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
@@ -74,4 +75,41 @@ package:
   script:
     - docker build -t git.sogyo.nl:5050/gvdwel/mancala-java .
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl:5050
-    - docker push git.sogyo.nl:5050/gvdwel/mancala-java/-/tree/mvc/api
+    - docker push git.sogyo.nl:5050/gvdwel/mancala-java
+
+deploy_staging2:
+  stage: deploy
+  image: docker:latest
+  services: 
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl:5050
+    - docker pull git.sogyo.nl:5050/gvdwel/mancala-java:latest
+    - docker run --rm -i -p 4200:80 git.sogyo.nl:5050/gvdwel/mancala-java:latest
+  environment:
+    name: staging
+  only:
+    #naar mvc
+    - mvc
+    
+
+deploy_staging:
+  stage: deploy
+  image: docker:latest
+  services: 
+    - docker:dind
+  script:
+    - apk upgrade && apk update
+    - apk add openssh-client
+    - apk add sshpass
+    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl:5050
+    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker pull git.sogyo.nl:5050/gvdwel/mancala-java
+    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER "docker container stop mancala_container && docker container rm mancala_container || true"
+    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker run --name mancala_container -p 80:80 -d git.sogyo.nl:5050/gvdwel/mancala-java
+  environment:
+    name: staging
+    url: https://testmancala.com
+  only:
+    #naar mvc
+    - master
+
