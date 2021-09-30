@@ -72,6 +72,6 @@ package:
     - docker:dind
   stage: package
   script:
-    - docker build -t https://git.sogyo.nl/gvdwel/mancala-java/-/edit/mvc/api
-    - docker login -u gilab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl
-    - docker push https://git.sogyo.nl/gvdwel/mancala-java/-/edit/mvc/api
+    - docker build -t git.sogyo.nl:5050/gvdwel/mancala-java .
+    - docker login git.sogyo.nl:5050
+    - docker push git.sogyo.nl:5050/gvdwel/mancala-java
