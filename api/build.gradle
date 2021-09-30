@@ -61,7 +61,7 @@ test {
 jar {
     manifest {
         attributes(
-                'mancala.App': 'mancala.api.models'
+                'App.java': 'com.mancala.App.java'
         )
     }
 }
