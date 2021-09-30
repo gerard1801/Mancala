@@ -30,3 +30,11 @@ test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
+
+jar {
+    manifest {
+        attributes(
+                'mancala.App': 'mancala.api.models'
+        )
+    }
+}
