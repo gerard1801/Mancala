@@ -9,6 +9,9 @@ before_script:
 build:
   stage: build
   script: gradle build
+  artifacts:
+    paths:
+      - api/build/libs/*.jar
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
