@@ -77,6 +77,22 @@ package:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.sogyo.nl:5050
     - docker push git.sogyo.nl:5050/gvdwel/mancala-java
 
+pages:
+  stage: deploy
+  script:
+    - mv $APP_OUTPUT_PATH $CI_PROJECT_DIR/public
+  artifacts:
+    paths:
+      - public
+  dependencies:
+    - build
+  environment:
+    name: prod
+    url: https://gvdwel.gitlab.io/mancala-java
+  when: manual
+  only:
+    - master
+
 deploy_staging2:
   stage: deploy
   image: docker:latest
