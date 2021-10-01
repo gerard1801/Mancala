@@ -34,7 +34,7 @@ test {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'mancala-java.api.build.classes.java.main.mancala.App.class'
+                'Main-Class': 'mancala.App'
         )
     }
 }
