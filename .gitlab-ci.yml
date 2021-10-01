@@ -91,7 +91,7 @@ pages:
     url: https://gvdwel.gitlab.io/mancala-java
   when: manual
   only:
-    - mvc
+    - master
 
 deploy_staging2:
   stage: deploy
@@ -106,7 +106,7 @@ deploy_staging2:
     name: staging
   only:
     #naar mvc
-    - main
+    - mvc
     
 
 deploy_staging:
