@@ -88,7 +88,7 @@ pages:
     - build
   environment:
     name: prod
-    url: https://gvdwel.gitlab.io/mancala-app
+    url: https://gvdwel.gitlab.io/mancala-java
   when: manual
   only:
     - mvc
