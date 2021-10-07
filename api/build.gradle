@@ -30,7 +30,16 @@ dependencies {
     
     // Reference the domain subproject.
     implementation project(':domain')
+    compile files('../client')
 
+    compile "javax.xml.bind:jaxb-api:2.3.0"
+    compile "javax.activation:activation:1.1"
+    compile "com.sun.xml.bind:jaxb-impl:2.3.0"
+    compile "com.sun.xml.bind:jaxb-core:2.3.0"
+    compile "com.sun.xml.ws:rt:2.3.0"
+    compile "com.sun.xml.ws:jaxws-rt:2.3.0"
+
+    implementation group: 'jakarta.activation', name: 'jakarta.activation-api', version: '1.2.1'
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
     // Also use the Mockito mocking framework to mock simple server functionality.
@@ -62,9 +71,10 @@ jar {
     manifest {
         attributes(
                 'Main-Class': 'mancala.App'
-
         )
     }
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+
+    }
 }
-
-

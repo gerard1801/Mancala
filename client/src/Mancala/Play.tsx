@@ -24,7 +24,7 @@ export function Play({ gameState, setGameState }: PlayProps) {
             return <button id={"p2Button"+number} onClick={(e) => tryPitPlay(e, gameState.players[player2Int].pits[number].index)} disabled={number>5}>index {gameState.players[player2Int].pits[number].index} stones {gameState.players[player2Int].pits[number].nrOfStones}</button>
         })
     }
-    async function tryPitPlay(e: React.FormEvent, pitIndex) {
+    async function tryPitPlay(e: React.FormEvent, pitIndex:number) {
         e.preventDefault();
         try {
             const response = await fetch('mancala/api/play', {

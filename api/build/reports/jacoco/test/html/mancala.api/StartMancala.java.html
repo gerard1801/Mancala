@@ -17,18 +17,17 @@ import mancala.domain.MancalaImpl;
 	public Response initialize(
 			@Context HttpServletRequest request, 
 			PlayerInput players) {
+<span class="fc" id="L20">        var mancala = new MancalaImpl();</span>
+<span class="fc" id="L21">        String namePlayer1 = players.getNameplayer1();</span>
+<span class="fc" id="L22">		String namePlayer2 = players.getNameplayer2();</span>
 
-<span class="fc" id="L21">        var mancala = new MancalaImpl();</span>
-<span class="fc" id="L22">        String namePlayer1 = players.getNameplayer1();</span>
-<span class="fc" id="L23">		String namePlayer2 = players.getNameplayer2();</span>
+<span class="fc" id="L24">        HttpSession session = request.getSession(true);</span>
+<span class="fc" id="L25">        session.setAttribute(&quot;mancala&quot;, mancala);</span>
+<span class="fc" id="L26">        session.setAttribute(&quot;player1&quot;, namePlayer1);</span>
+<span class="fc" id="L27">        session.setAttribute(&quot;player2&quot;, namePlayer2);</span>
 
-<span class="fc" id="L25">        HttpSession session = request.getSession(true);</span>
-<span class="fc" id="L26">        session.setAttribute(&quot;mancala&quot;, mancala);</span>
-<span class="fc" id="L27">        session.setAttribute(&quot;player1&quot;, namePlayer1);</span>
-<span class="fc" id="L28">        session.setAttribute(&quot;player2&quot;, namePlayer2);</span>
-
-<span class="fc" id="L30">		var output = new Mancala(mancala, namePlayer1, namePlayer2);</span>
-<span class="fc" id="L31">		return Response.status(200).entity(output).build();</span>
+<span class="fc" id="L29">		var output = new Mancala(mancala, namePlayer1, namePlayer2);</span>
+<span class="fc" id="L30">		return Response.status(200).entity(output).build();</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
